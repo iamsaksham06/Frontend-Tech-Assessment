@@ -1,47 +1,44 @@
-// llmNode.js
+// concatNode.js
+// Example node that concatenates two text inputs.
 
 import { Position } from 'reactflow';
 import { GenericNode } from './GenericNode';
 
-export const LLMNode = ({ id, data }) => {
+export const ConcatNode = ({ id, data }) => {
   return (
     <GenericNode
       id={id}
       data={data}
-      title="LLM"
-      description="Call a language model with system and user prompts."
+      title="Concat"
+      description="Join two text inputs with a separator."
       fields={[
         {
-          name: 'model',
-          label: 'Model',
+          name: 'separator',
+          label: 'Separator',
           type: 'text',
-          defaultValue: 'gpt-4.1',
-        },
-        {
-          name: 'temperature',
-          label: 'Temperature',
-          type: 'number',
-          defaultValue: 0.7,
-          min: 0,
-          max: 2,
-          step: 0.1,
+          defaultValue: ' ',
+          placeholder: ', ',
         },
       ]}
+      renderPreview={({ data }) => {
+        const sep = data.separator ?? ' ';
+        return `Outputs left + "${sep}" + right.`;
+      }}
       handles={[
         {
-          id: 'system',
+          id: 'left',
           type: 'target',
           position: Position.Left,
           style: { top: '33%' },
         },
         {
-          id: 'prompt',
+          id: 'right',
           type: 'target',
           position: Position.Left,
           style: { top: '66%' },
         },
         {
-          id: 'response',
+          id: 'result',
           type: 'source',
           position: Position.Right,
           style: { top: '50%' },
@@ -50,3 +47,5 @@ export const LLMNode = ({ id, data }) => {
     />
   );
 };
+
+

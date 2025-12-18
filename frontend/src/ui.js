@@ -10,6 +10,11 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
+import { MathNode } from './nodes/mathNode';
+import { DelayNode } from './nodes/delayNode';
+import { HttpNode } from './nodes/httpNode';
+import { ConcatNode } from './nodes/concatNode';
+import { SwitchNode } from './nodes/switchNode';
 
 import 'reactflow/dist/style.css';
 
@@ -20,6 +25,11 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  math: MathNode,
+  delay: DelayNode,
+  http: HttpNode,
+  concat: ConcatNode,
+  switch: SwitchNode,
 };
 
 const selector = (state) => ({
