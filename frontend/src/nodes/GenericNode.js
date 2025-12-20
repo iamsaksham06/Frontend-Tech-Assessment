@@ -192,16 +192,31 @@ export const GenericNode = ({
             return (
               <label key={field.name} style={{ display: 'flex', flexDirection: 'column' }}>
                 <span style={fieldLabelStyle}>{field.label}</span>
-                <input
-                  type={field.type === 'number' ? 'number' : 'text'}
-                  value={value}
-                  min={field.min}
-                  max={field.max}
-                  step={field.step}
-                  placeholder={field.placeholder}
-                  onChange={(e) => handleChange(field, e.target.value)}
-                  style={commonInputStyle}
-                />
+                {field.as === 'textarea' || field.name === 'text' ? (
+                  <textarea
+                    value={value}
+                    placeholder={field.placeholder}
+                    onChange={(e) => handleChange(field, e.target.value)}
+                    style={{ ...commonInputStyle, resize: 'none', overflow: 'hidden', minHeight: 32 }}
+                    rows={1}
+                    onInput={e => {
+                      // Auto-grow logic
+                      e.target.style.height = 'auto';
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                    }}
+                  />
+                ) : (
+                  <input
+                    type={field.type === 'number' ? 'number' : 'text'}
+                    value={value}
+                    min={field.min}
+                    max={field.max}
+                    step={field.step}
+                    placeholder={field.placeholder}
+                    onChange={(e) => handleChange(field, e.target.value)}
+                    style={commonInputStyle}
+                  />
+                )}
               </label>
             );
           })}
