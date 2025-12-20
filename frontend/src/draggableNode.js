@@ -1,32 +1,36 @@
 // draggableNode.js
 
+import './draggableNode.css';
+
+const nodeIcons = {
+  customInput: '📥',
+  llm: '🤖',
+  customOutput: '📤',
+  text: '📝',
+  math: '🔢',
+  delay: '⏱️',
+  http: '🌐',
+  concat: '🔗',
+  switch: '🔄',
+};
+
 export const DraggableNode = ({ type, label }) => {
     const onDragStart = (event, nodeType) => {
       const appData = { nodeType }
-      event.target.style.cursor = 'grabbing';
       event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
       event.dataTransfer.effectAllowed = 'move';
     };
   
+    const icon = nodeIcons[type] || '⚙️';
+  
     return (
       <div
-        className={type}
+        className="draggable-node"
         onDragStart={(event) => onDragStart(event, type)}
-        onDragEnd={(event) => (event.target.style.cursor = 'grab')}
-        style={{ 
-          cursor: 'grab', 
-          minWidth: '80px', 
-          height: '60px',
-          display: 'flex', 
-          alignItems: 'center', 
-          borderRadius: '8px',
-          backgroundColor: '#1C2536',
-          justifyContent: 'center', 
-          flexDirection: 'column'
-        }} 
         draggable
       >
-          <span style={{ color: '#fff' }}>{label}</span>
+          <span className="draggable-node-icon">{icon}</span>
+          <span className="draggable-node-label">{label}</span>
       </div>
     );
   };

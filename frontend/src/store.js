@@ -51,4 +51,17 @@ export const useStore = create((set, get) => ({
         }),
       });
     },
+    removeNode: (nodeId) => {
+      const { nodes, edges } = get();
+      // Remove the node
+      const updatedNodes = nodes.filter((node) => node.id !== nodeId);
+      // Remove all edges connected to this node
+      const updatedEdges = edges.filter(
+        (edge) => edge.source !== nodeId && edge.target !== nodeId
+      );
+      set({
+        nodes: updatedNodes,
+        edges: updatedEdges,
+      });
+    },
   }));

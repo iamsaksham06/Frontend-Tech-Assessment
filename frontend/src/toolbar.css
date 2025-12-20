@@ -1,0 +1,21 @@
+.toolbar {
+  background-color: #0B1120;
+  border-bottom: 1px solid #1F2937;
+  padding: var(--spacing-lg);
+  box-shadow: 0 4px 12px rgba(15,23,42,0.35);
+}
+
+.toolbar-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: #F9FAFB;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.toolbar-nodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}

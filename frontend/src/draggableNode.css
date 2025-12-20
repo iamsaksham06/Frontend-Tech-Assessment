@@ -1,0 +1,46 @@
+.draggable-node {
+  cursor: grab;
+  min-width: 100px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  border-radius: var(--radius-md);
+  background-color: #1F2937;
+  border: 1px solid #374151;
+  color: #F9FAFB;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-sm) var(--spacing-md);
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 12px rgba(15,23,42,0.35);
+  user-select: none;
+}
+
+.draggable-node:hover {
+  background-color: #374151;
+  border-color: #4B5563;
+  box-shadow: 0 4px 12px rgba(15,23,42,0.5);
+  transform: translateY(-1px);
+}
+
+.draggable-node:active {
+  cursor: grabbing;
+  transform: translateY(0);
+  box-shadow: var(--color-shadow-sm);
+}
+
+.draggable-node-icon {
+  font-size: var(--font-size-md);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.draggable-node-label {
+  color: #F9FAFB;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}

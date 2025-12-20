@@ -77,6 +77,32 @@ const commonInputStyle = {
 //   style?: React.CSSProperties
 // }
 
+const deleteButtonStyle = {
+  position: 'absolute',
+  top: 6,
+  right: 6,
+  width: 22,
+  height: 22,
+  border: 'none',
+  background: 'transparent',
+  color: '#ef4444',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontSize: 18,
+  fontWeight: 'bold',
+  lineHeight: 1,
+  padding: 0,
+  transition: 'all 150ms ease-in-out',
+  zIndex: 10,
+};
+
+const containerWithDeleteStyle = {
+  ...baseContainerStyle,
+  position: 'relative',
+};
+
 export const GenericNode = ({
   id,
   data,
@@ -88,6 +114,7 @@ export const GenericNode = ({
   renderPreview,
 }) => {
   const updateNodeField = useStore((state) => state.updateNodeField);
+  const removeNode = useStore((state) => state.removeNode);
 
   const getFieldValue = (field) => {
     const existing = data && data[field.name] !== undefined ? data[field.name] : undefined;
@@ -112,8 +139,29 @@ export const GenericNode = ({
     updateNodeField(id, field.name, value);
   };
 
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    removeNode(id);
+  };
+
   return (
-    <div style={{ ...baseContainerStyle, ...containerStyle }}>
+    <div style={{ ...containerWithDeleteStyle, ...containerStyle }}>
+      <button
+        onClick={handleDelete}
+        style={deleteButtonStyle}
+        onMouseEnter={(e) => {
+          e.target.style.color = '#dc2626';
+          e.target.style.transform = 'scale(1.2)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.color = '#ef4444';
+          e.target.style.transform = 'scale(1)';
+        }}
+        title="Delete node"
+        aria-label="Delete node"
+      >
+        ×
+      </button>
       <div style={headerStyle}>{title}</div>
       {description && <div style={descriptionStyle}>{description}</div>}
 
